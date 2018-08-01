@@ -77,8 +77,11 @@ If you want to pass parameters that start with a dot character you can do it in 
 
 .. code-block:: python
 
-    params = {'disabled': True, '.id' :'*7'}
+    params = {'=disabled': True, '=.id' :'*7'}
     api(cmd='/ip/firewall/nat/set', **params)
+
+    params = {'?type': 'vlan'}
+    api(cmd='/interface/print', **params}
 
 Note that ``.id`` must always be passed as read from API. They usually start with a ``*`` followed by a number.
 Keep in mind that they do change across reboots. As a rule of thumb, always read them first.
