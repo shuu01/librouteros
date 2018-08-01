@@ -45,17 +45,17 @@ def connect(host, username, password, **kwargs):
     try:
         # First send dummy credentials to know if we get a =ret= back.
         # This way we know if it is a pre 6.43 auth method or not.
-        sentence = api('/login', **{'name': 'dummy_user', 'password': 'dummy_password'})
+        sentence = api('/login', **{'=name': 'dummy_user', '=password': 'dummy_password'})
         token = sentence[0]['ret']
     except (TrapError, MultiTrapError):
         # Login failed so use 6.43 auth method.
-        api('/login', **{'name': username, 'password': password})
+        api('/login', **{'=name': username, '=password': password})
     except (ConnectionError, FatalError):
         transport.close()
         raise
     else:
         # We got =ret= so use pre 6.43 auth method.
-        api('/login', **{'name': username, 'response': encode_password(token, password)})
+        api('/login', **{'=name': username, '=response': encode_password(token, password)})
 
     return api
 

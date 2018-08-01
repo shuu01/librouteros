@@ -60,7 +60,7 @@ class Composer:
         Create a attribute word from key, value pair.
         Values are casted to api equivalents.
         """
-        return '={}={}'.format(key, Composer.pythonCast(value))
+        return '{}={}'.format(key, Composer.pythonCast(value))
 
 
 class Api(Composer, Parser):
